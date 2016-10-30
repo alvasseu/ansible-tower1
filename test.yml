@@ -4,13 +4,6 @@
   gather_facts: no
   connection: local
   
-  vars:
-  cli:
-    host: "{{ inventory_hostname }}"
-    username: netscript
-    password: sgcib123
-    transport: cli
-  
   tasks:
     - name: show version
       eos_command:

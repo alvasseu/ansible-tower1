@@ -1,0 +1,14 @@
+---
+- name: demo playbook
+  hosts: all
+  gather_facts: no
+  connection: local
+  tasks:
+    - name: show version
+      eos_command:
+        commands: show version
+        provider: "{{ eapi }}"
+      register: output
+        
+    - name: output to stdout
+      debug: var=output.stdout_lines[0]

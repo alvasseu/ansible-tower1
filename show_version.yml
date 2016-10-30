@@ -3,6 +3,13 @@
   hosts: all
   gather_facts: no
   
+  vars:
+  cli:
+    host: "{{ inventory_hostname }}"
+    username: netscript
+    password: sgcib123
+    transport: cli
+  
   tasks:
     - name: run show version on remote devices
       ios_command:

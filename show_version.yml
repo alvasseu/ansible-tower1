@@ -4,6 +4,12 @@
   gather_facts: no
   connection: local
   
+  vars:
+   morning_check:
+     - show version
+     - show clock
+     - show ip int br
+  
   tasks:
   
   - name: SYS | Define provider
@@ -18,16 +24,13 @@
       provider: "{{ provider }}"
       commands:
         - show version
-      wait_for:
-        - result[0] contains NXOS
     register: version
 
-  - name: run show ip int br on remote devices
-    ios_command:
+  - name: run multiple show on remote devices
+    cisco_ios_show:
       provider: "{{ provider }}"
-      commands:
-        - show ip int br
-    register: interfaces
+      commands: "{{ morning_check }}"
+    register: check
 
   - debug: msg="{{ version.stdout }}"
-  - debug: msg="{{ interfaces.stdout }}"
+  - debug: msg="{{ check.stdout }}"

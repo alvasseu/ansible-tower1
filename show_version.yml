@@ -2,15 +2,23 @@
 - name: demo playbook
   hosts: all
   gather_facts: no
-  vars:
-    cli:
-      host: "{{ inventory_hostname }}"
-      username: netscript
-      password: sgcib123
-      transport: cli
+  connection: local
   
   tasks:
+  
+    - name: SYS | Define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "netscript"
+        password: "sgcib123"
+  
     - name: run show version on remote devices
-      ios_command:
-        commands: show version
-        provider: "{{ cli }}"
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show clock
+    register: clock
+
+  - debug: msg="{{ clock.stdout }}"
+

@@ -8,29 +8,56 @@
    morning_check:
      - show version
      - show clock
+     - show run
      - show ip int br
-  
+     - show ip route
+
   tasks:
-  
   - name: SYS | Define provider
     set_fact:
       provider:
         host: "{{ inventory_hostname }}"
         username: "netscript"
         password: "sgcib123"
-  
-  - name: run show version on remote devices
+
+  - name: IOS | Show clock
     ios_command:
       provider: "{{ provider }}"
       commands:
-        - show version
-    register: version
+        - show clock
+    register: clock
 
-  - name: run multiple show on remote devices
-    cisco_ios_show:
+  - name: CHECK commands
+    ios_command:
       provider: "{{ provider }}"
       commands: "{{ morning_check }}"
     register: check
 
-  - debug: msg="{{ version.stdout }}"
-  - debug: msg="{{ check.stdout }}"
+  - name: Use multiple commands
+    ios_command:
+      commands:
+        - show clock
+        - clear counters interface all
+      provider: "{{ provider }}"
+    register: interfaces
+
+  - name: Get release timestamp
+    command: date +%Y%m%d
+    register: timestamp
+
+  - name: Create directory of the day
+    file: path=/home/netadmin/BACKUP/{{ timestamp.stdout }} state=directory
+
+  - name: write running-config to disk on Ansible host
+    copy:
+     content: "{{ check.stdout_lines }}"
+     dest: "/home/netadmin/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"
+
+  - name: get list of backup files
+    command: "ls /home/netadmin/BACKUP/{{ timestamp.stdout }}"
+    register: dir_back
+
+  - debug: msg="{{ clock.stdout }}"
+  - debug: msg="{{ check.stdout_lines }}"
+  - debug: msg="{{ interfaces.stdout_lines }}"
+  - debug: msg="{{ dir_back.stdout_lines }}"

@@ -17,8 +17,8 @@
     ios_command:
       provider: "{{ provider }}"
       commands:
-        - show clock
-    register: clock
+        - show version
+    register: version
 
   - debug: msg="{{ clock.stdout }}"
 

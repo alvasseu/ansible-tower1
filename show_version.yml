@@ -20,5 +20,12 @@
         - show version
     register: version
 
-  - debug: msg="{{ version.stdout }}"
+  - name: run show ip int br on remote devices
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show ip int br
+    register: interfaces
 
+  - debug: msg="{{ version.stdout }}"
+  - debug: msg="{{ interfaces.stdout }}"

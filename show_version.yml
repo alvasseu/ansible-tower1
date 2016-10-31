@@ -20,5 +20,5 @@
         - show version
     register: version
 
-  - debug: msg="{{ clock.stdout }}"
+  - debug: msg="{{ version.stdout }}"
 

@@ -6,14 +6,14 @@
   
   tasks:
   
-    - name: SYS | Define provider
-      set_fact:
-        provider:
-          host: "{{ inventory_hostname }}"
-          username: "netscript"
-          password: "sgcib123"
+  - name: SYS | Define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "netscript"
+        password: "sgcib123"
   
-    - name: run show version on remote devices
+  - name: run show version on remote devices
     ios_command:
       provider: "{{ provider }}"
       commands:

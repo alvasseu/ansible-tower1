@@ -49,17 +49,17 @@
     command: whoami
     register: myaccount
 
-#  - name: Create directory of the day
-#    file: path=/home/jcoppi/BACKUP/{{ timestamp.stdout }} state=directory
+  - name: Create directory of the day
+    file: path=/home/awx/BACKUP/{{ timestamp.stdout }} state=directory
 
-#  - name: write running-config to disk on Ansible host
-#    copy:
-#     content: "{{ check.stdout_lines }}"
-#     dest: "/home/jcoppi/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"
+- name: write running-config to disk on Ansible host
+    copy:
+     content: "{{ check.stdout_lines }}"
+     dest: "/home/awx/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"
 
-#  - name: get list of backup files
-#    command: "ls /home/jcoppi/BACKUP/{{ timestamp.stdout }}"
-#    register: dir_back
+  - name: get list of backup files
+    command: "ls /home/awx/BACKUP/{{ timestamp.stdout }}"
+    register: dir_back
 
   - debug: msg="{{ clock.stdout }}"
   - debug: msg="{{ check.stdout_lines }}"

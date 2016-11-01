@@ -52,7 +52,7 @@
   - name: Create directory of the day
     file: path=/home/awx/BACKUP/{{ timestamp.stdout }} state=directory
 
-- name: write running-config to disk on Ansible host
+  - name: write running-config to disk on Ansible host
     copy:
      content: "{{ check.stdout_lines }}"
      dest: "/home/awx/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"

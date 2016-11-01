@@ -46,7 +46,7 @@
     register: timestamp
 
   - name: Create directory of the day
-    file: path=/home/netadmin/jcoppi/{{ timestamp.stdout }} state=directory
+    file: path=/home/jcoppi/BACKUP/{{ timestamp.stdout }} state=directory
 
   - name: write running-config to disk on Ansible host
     copy:

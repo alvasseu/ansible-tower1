@@ -44,10 +44,6 @@
   - name: Get release timestamp
     command: date +%Y%m%d
     register: timestamp
-    
-  - name: Get release timestamp
-    command: whoami
-    register: myaccount
 
   - name: Create directory of the day
     file: path=/home/awx/BACKUP/{{ timestamp.stdout }} state=directory
@@ -64,4 +60,4 @@
   - debug: msg="{{ clock.stdout }}"
   - debug: msg="{{ check.stdout_lines }}"
   - debug: msg="{{ interfaces.stdout_lines }}"
-  - debug: msg="{{ myaccount.stdout }}"
+

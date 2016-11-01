@@ -41,21 +41,21 @@
       provider: "{{ provider }}"
     register: interfaces
 
-#  - name: Get release timestamp
-#    command: date +%Y%m%d
-#    register: timestamp
+  - name: Get release timestamp
+    command: date +%Y%m%d
+    register: timestamp
 
-#  - name: Create directory of the day
-#    file: path=/home/netadmin/BACKUP/{{ timestamp.stdout }} state=directory
+  - name: Create directory of the day
+    file: path=/home/netadmin/jcoppi/{{ timestamp.stdout }} state=directory
 
-#  - name: write running-config to disk on Ansible host
-#    copy:
-#     content: "{{ check.stdout_lines }}"
-#     dest: "/home/netadmin/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"
+  - name: write running-config to disk on Ansible host
+    copy:
+     content: "{{ check.stdout_lines }}"
+     dest: "/home/jcoppi/BACKUP/{{ timestamp.stdout }}/{{ inventory_hostname }}.check"
 
-#  - name: get list of backup files
-#    command: "ls /home/netadmin/BACKUP/{{ timestamp.stdout }}"
-#    register: dir_back
+  - name: get list of backup files
+    command: "ls /home/jcoppi/BACKUP/{{ timestamp.stdout }}"
+    register: dir_back
 
   - debug: msg="{{ clock.stdout }}"
   - debug: msg="{{ check.stdout_lines }}"

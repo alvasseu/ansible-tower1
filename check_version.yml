@@ -18,5 +18,10 @@
       commands:
         - show version
     register: version
+     
+  - name: Check OS
+    command: ansible --version
+    register: ansiblev
     
-  - debug: msg="{{ version.stdout }}"
+  - debug: msg="{{ version.stdout }}"  
+  - debug: msg="{{ ansiblev.stdout }}"

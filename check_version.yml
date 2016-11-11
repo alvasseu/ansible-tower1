@@ -1,0 +1,22 @@
+---
+- name: demo playbook
+  hosts: all
+  gather_facts: no
+  connection: local
+  
+  tasks:
+  - name: SYS | Define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        username: "netscript"
+        password: "sgcib123"
+
+  - name: IOS | Show clock
+    ios_command:
+      provider: "{{ provider }}"
+      commands:
+        - show version
+    register: version
+    
+   - debug: msg="{{ version.stdout }}"

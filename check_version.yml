@@ -22,6 +22,7 @@
   - name: Check OS
     command: ansible --version
     register: ansiblev
+    when: "'nxos.7.0.3.I4.1.bin' in version"
     
   - debug: msg="{{ version.stdout }}"  
   - debug: msg="{{ ansiblev.stdout }}"

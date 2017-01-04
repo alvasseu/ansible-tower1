@@ -11,12 +11,12 @@
         host: "{{ inventory_hostname }}"
         username: "netscript"
         password: "sgcib123"
-
+        
   - name: Gather Show Version Facts
-    commands:
-      - command: show version
-        output: json
-    provider: "{{ provider }}"
+    nxos_command:
+      commands:
+        - 'show version'
+      provider: '{{ provider }}'
     register: showvers
 
-  - debug: msg="{{ showvers.stdout }}"
+  - debug: msg="{{ clock.stdout }}"

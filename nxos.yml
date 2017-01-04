@@ -14,7 +14,6 @@
 
   - name: Gather Show Version Facts
     nxos_command: command='show version' host={{ inventory_hostname }} type=show
-      provider: '{{ provider }}'
     register: showvers
 
   - debug: msg="{{ showvers.stdout }}"

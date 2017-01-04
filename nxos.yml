@@ -14,9 +14,9 @@
         
   - name: Gather Show Version Facts
     nxos_command:
-      commands:
-        - 'show version'
-      output: json
+    commands:
+      - command: show version
+        output: json
       provider: '{{ provider }}'
     register: showvers
 

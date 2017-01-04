@@ -9,6 +9,7 @@
     set_fact:
       provider:
         host: "{{ inventory_hostname }}"
+        transport: nxapi
         username: "netscript"
         password: "sgcib123"
         
@@ -18,5 +19,10 @@
         - show version
       provider: "{{ provider }}"    
     register: showvers
+
+  - name: Check NXOS Version
+    assert:
+      that:
+        - "'7.0(3)I4(1)' in showvers['stdout'][0]['kickstart_ver_str']"
 
   - debug: msg="{{ showvers.stdout_lines }}"

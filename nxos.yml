@@ -19,4 +19,4 @@
       provider: "{{ provider }}"    
     register: showvers
 
-  - debug: msg="{{ clock.stdout_lines }}"
+  - debug: msg="{{ clock.stdout }}"

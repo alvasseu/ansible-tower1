@@ -15,8 +15,8 @@
   - name: Gather Show Version Facts
     nxos_command:
       commands:
-        - command: show version
+        - show version
       provider: "{{ provider }}"    
     register: showvers
 
-  - debug: msg="{{ clock.stdout }}"
+  - debug: msg="{{ clock.stdout_lines }}"

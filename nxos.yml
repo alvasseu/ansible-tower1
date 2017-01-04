@@ -17,7 +17,6 @@
     commands:
       - command: show version
         output: json
-      provider: '{{ provider }}'
     register: showvers
 
   - debug: msg="{{ clock.stdout }}"

@@ -1,3 +1,4 @@
+---
 - name: Gather Show Version Facts
   eos_command:
     commands:

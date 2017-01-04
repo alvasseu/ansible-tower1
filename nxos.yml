@@ -13,7 +13,10 @@
         password: "sgcib123"
 
   - name: Gather Show Version Facts
-    nxos_command: command='show version' host={{ inventory_hostname }} type=show
+    commands:
+      - command: show version
+        output: json
+    provider: "{{ provider }}"
     register: showvers
 
   - debug: msg="{{ showvers.stdout }}"

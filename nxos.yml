@@ -18,3 +18,5 @@
         - 'show version'
       provider: '{{ provider }}'
     register: showvers
+
+  - debug: msg="{{ showvers.stdout }}"

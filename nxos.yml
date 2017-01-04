@@ -16,6 +16,7 @@
     nxos_command:
       commands:
         - show version
+        output: json
       provider: "{{ provider }}"    
     register: showvers
 

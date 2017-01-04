@@ -13,7 +13,7 @@
         password: "sgcib123"
 
   - name: Gather Show Version Facts
-    eos_command:
+    nxos_command:
       commands:
         - 'show version'
       provider: '{{ provider }}'

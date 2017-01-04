@@ -1,0 +1,23 @@
+---
+- name: demo playbook
+  hosts: all
+  gather_facts: no
+  connection: local
+  
+  tasks:
+  - name: SYS | Define provider
+    set_fact:
+      provider:
+        host: "{{ inventory_hostname }}"
+        transport: nxapi
+        username: "netscript"
+        password: "sgcib123"
+        
+  - name: Gather Show Version Facts
+    nxos_command:
+      commands:
+        - show version
+      provider: "{{ provider }}"    
+    register: showvers
+
+  - debug: msg="{{ showvers.stdout_lines }}"

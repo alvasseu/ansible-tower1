@@ -4,7 +4,7 @@
   gather_facts: no
   connection: local
   
-- block:
+  tasks:
     - name: Install OS
       nxos_install_os:
         system_image_file: nxos.7.0.3.I4.4.bin

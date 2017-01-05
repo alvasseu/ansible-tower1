@@ -23,9 +23,18 @@
       provider: "{{ provider }}"    
     register: showvers
 
+  - set_fact: perform_upgrade={{ Current_Version in showvers['stdout'][0]['kickstart_ver_str'] }}
+
   - name: Check NXOS Version
     assert:
       that:
         - "'{{ Current_Version }}' in showvers['stdout'][0]['kickstart_ver_str']"
+        
+  - name: Configuration before upgrade 
+    nxos_command:
+      commands:
+        - show running
+      provider: '{{ provider }}'
+    when: perform_upgrade
 
   - debug: msg="{{ showvers.stdout_lines }}"

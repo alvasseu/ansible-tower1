@@ -38,10 +38,8 @@
     when: perform_upgrade
 
   - name: Install new binary file
-    nxos_command:
-      commands:
-        - 'install all nxos bootflash:///nxos.7.0.3.I4.4.bin'
-      provider: '{{ provider }}'
+    nxos_install_os:
+      system_image_file: nxos.7.0.3.I4.4.bin
     when: perform_upgrade
 
   - name: Wait for switch to come back online

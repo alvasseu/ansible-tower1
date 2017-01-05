@@ -40,7 +40,7 @@
   - name: Install new binary file
     nxos_command:
       commands:
-        - 'install all nxos bootflash:nxos.7.0.3.I4.4.bin'
+        - 'install all nxos bootflash:///nxos.7.0.3.I4.4.bin'
       provider: '{{ provider }}'
     when: perform_upgrade
 

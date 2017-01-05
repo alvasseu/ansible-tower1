@@ -39,7 +39,7 @@
 
   - name: Install new binary file
     nxos_install_os:
-      system_image_file: nxos.7.0.3.I4.4.bin
+      system_image_file: bootflash:///nxos.7.0.3.I4.4.bin
     when: perform_upgrade
 
   - name: Wait for switch to come back online

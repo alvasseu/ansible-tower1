@@ -16,7 +16,7 @@
         username: "netscript"
         password: "sgcib123"
         
-  - name: Gather Show Version Facts
+  - name: Gather Show Version before upgrade
     nxos_command:
       commands:
         - show version
@@ -30,11 +30,47 @@
       that:
         - "'{{ Current_Version }}' in showvers['stdout'][0]['kickstart_ver_str']"
         
-  - name: Configuration before upgrade 
+  - name: Check time before upgrade 
     nxos_command:
       commands:
-        - show running
+        - show clock
       provider: '{{ provider }}'
     when: perform_upgrade
 
-  - debug: msg="{{ showvers.stdout_lines }}"
+  - name: Install new binary file
+    nxos_command:
+      commands:
+        - 'install all nxos bootflash:nxos.7.0.3.I4.4.bin'
+      provider: '{{ provider }}'
+    when: perform_upgrade
+
+  - name: Wait for switch to come back online
+    wait_for:
+      host={{ inventory_hostname }}
+      delay=10
+      port=80
+    when: perform_upgrade
+
+  - pause: seconds=5
+    when: perform_upgrade
+
+  - name: Check time before upgrade 
+    nxos_command:
+      commands:
+        - show clock
+      provider: '{{ provider }}'
+    when: perform_upgrade
+
+  - name: Gather Show Version after upgrade
+    nxos_command:
+      commands:
+        - show version
+      provider: "{{ provider }}"    
+    register: showvers2
+    when: perform_upgrade
+
+  - name: Check NXOS Version after upgrade
+    assert:
+      that:
+        - "'7.0(3)I4(4)' in showvers2['stdout'][0]['kickstart_ver_str']"
+    when: perform_upgrade

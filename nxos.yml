@@ -4,6 +4,9 @@
   gather_facts: no
   connection: local
   
+  vars:
+   Current_Version: 7.0(3)I4(1)
+
   tasks:
   - name: SYS | Define provider
     set_fact:
@@ -23,6 +26,6 @@
   - name: Check NXOS Version
     assert:
       that:
-        - "'7.0(3)I4(1)' in showvers['stdout'][0]['kickstart_ver_str']"
+        - "'0{{ Current_Version }}' in showvers['stdout'][0]['kickstart_ver_str']"
 
   - debug: msg="{{ showvers.stdout_lines }}"

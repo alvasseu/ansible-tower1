@@ -26,6 +26,6 @@
   - name: Check NXOS Version
     assert:
       that:
-        - "'0{{ Current_Version }}' in showvers['stdout'][0]['kickstart_ver_str']"
+        - "'{{ Current_Version }}' in showvers['stdout'][0]['kickstart_ver_str']"
 
   - debug: msg="{{ showvers.stdout_lines }}"

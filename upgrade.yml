@@ -1,17 +1,11 @@
 ---
-
 - block:
-
- vars:
-  un = "netscript"
-  pw = "sgcib123"
-
     - name: Install OS
       nxos_install_os:
         system_image_file: nxos.7.0.3.I4.4.bin
         host: "{{ inventory_hostname }}"
-        username: "{{ un }}"
-        password: "{{ pwd }}"
+        username: "netscript"
+        password: "sgcib123"
         transport: nxapi
     rescue:
       - name: Wait for device to perform checks
@@ -32,8 +26,8 @@
         nxos_command:
           commands:
             - show version
-          username: "{{ un }}"
-          password: "{{ pwd }}"
+          username: "netscript"
+          password: "sgcib123"
           host: "{{ inventory_hostname }}"
           transport: nxapi
         register: output

@@ -2,7 +2,7 @@
 - block:
     - name: Install OS
       nxos_install_os:
-        system_image_file: nxos.7.0.3.I2.2d.bin
+        system_image_file: nxos.7.0.3.I4.4.bin
         host: "{{ inventory_hostname }}"
         username: "netscript"
         password: "sgcib123"

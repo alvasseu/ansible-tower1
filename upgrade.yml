@@ -3,8 +3,8 @@
 - block:
 
  vars:
-     un = "netscript"
-     pw = "sgcib123"
+  un = "netscript"
+  pw = "sgcib123"
 
     - name: Install OS
       nxos_install_os:
